@@ -1,6 +1,7 @@
 <template>
   <div class="about">
     <h1>Scripture</h1>
+    <p>test</p>
   </div>
 </template>
 
