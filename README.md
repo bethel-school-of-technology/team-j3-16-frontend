@@ -1,4 +1,4 @@
-# vuetify3
+# Pray IT front end
 
 This template should help get you started developing with Vue 3 in Vite.
 
