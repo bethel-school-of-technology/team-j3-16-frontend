@@ -7,14 +7,14 @@
     <p> Find by topic: </p>
 
     <v-btn 
-      variant="tonal" color="yellow"
+      variant="tonal" color="amber"
       rounded="xl" size="small"
       @click="health" 
       > Health 
     </v-btn>
 
     <v-btn 
-      variant="tonal" color="secondary"
+      variant="tonal" color="green"
       rounded="xl" size="small"
       @click="faith" 
       > Faith 
@@ -49,14 +49,14 @@
     </v-btn>
 
     <v-btn 
-      variant="tonal" color="green"
+      variant="tonal" color="lime"
       rounded="xl" size="small"
       @click="anger" 
       > Anger 
     </v-btn>
 
     <v-btn 
-      variant="tonal" color="blue"
+      variant="tonal" color="deep-orange"
       rounded="xl" size="small"
       @click="stress" 
       > Stress 
@@ -70,15 +70,13 @@
     </v-btn>
 
     <v-btn 
-      variant="tonal" color="black"
+      variant="tonal" color="teal"
       rounded="xl" size="small"
       @click="depression" 
       > Depression 
     </v-btn>
 
-    <!-- <div class="versesBox">
-      {{ VersesEvent }}
-    </div> -->
+    <verses-event ref="versesEvent"></verses-event>
 
   </div>
 </template>
@@ -93,16 +91,17 @@ export default {
     VersesEvent
   },
   methods: {
-    health() { VersesEvent.methods.health(); },
-    faith() { VersesEvent.methods.faith(); },
-    finance() { VersesEvent.methods.finance(); },
-    love() { VersesEvent.methods.love(); },
-    family() { VersesEvent.methods.family(); },
-    loss() { VersesEvent.methods.loss(); },
-    anger() { VersesEvent.methods.anger(); },
-    stress() { VersesEvent.methods.stress(); },
-    pride() { VersesEvent.methods.pride(); },
-    depression() { VersesEvent.methods.depression(); }
+
+    health() { this.$refs.versesEvent.health(); },
+    faith() { this.$refs.versesEvent.faith(); },
+    finance() { this.$refs.versesEvent.finance(); },
+    love() { this.$refs.versesEvent.love(); },
+    family() { this.$refs.versesEvent.family(); },
+    loss() { this.$refs.versesEvent.loss(); },
+    anger() { this.$refs.versesEvent.anger(); },
+    stress() { this.$refs.versesEvent.stress(); },
+    pride() { this.$refs.versesEvent.pride(); },
+    depression() { this.$refs.versesEvent.depression(); }
   }
 }
 
@@ -131,5 +130,13 @@ export default {
 
 .scripture p {
   color: gray;
+}
+
+.scripture button {
+  margin: .5rem;
+}
+
+ .versesBox {
+  margin: 1.5rem;
 }
 </style>
