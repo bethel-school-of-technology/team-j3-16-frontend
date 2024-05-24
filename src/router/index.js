@@ -12,7 +12,7 @@ const routes = [
   { path: '/scripture', name: 'scripture', component: ScriptureView },
   { path: '/login', name: 'login', component: LoginView },
   { path: '/signup', name: 'signup', component: SignupView },
-  { path: '/about', name: 'about', component: () => import('../views/AboutView.vue') },
+  { path: '/testimony', name: 'testimony', component: () => import('../views/TestimonyView.vue') },
 ];
 
 const router = createRouter({

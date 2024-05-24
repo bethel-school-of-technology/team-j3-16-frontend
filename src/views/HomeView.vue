@@ -11,7 +11,7 @@ import MockPreview from '../components/MockPreview.vue';
   <div>
     <h1>Global Active Prayer Network</h1>
     <PrayerForm />
-    <MockPreview />
+    <!-- <MockPreview /> -->
 
 
   </div>
