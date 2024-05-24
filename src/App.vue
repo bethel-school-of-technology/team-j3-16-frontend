@@ -4,6 +4,8 @@ import { useStore } from 'vuex';
 import { useRouter, RouterLink, RouterView } from 'vue-router';
 import { VApp, VAppBar, VMain, VContainer, VBtn, VImg, VIcon, VSpacer } from 'vuetify/components';
 import 'vuetify/styles';
+import 'primeicons/primeicons.css'
+
 
 </script>
 
@@ -12,15 +14,19 @@ import 'vuetify/styles';
 <template>
   <v-app>
     <v-app-bar app>
-      <v-img alt="Vue logo" src="@/assets/logo.svg" contain max-width="125" max-height="125" class="ma-4" />
 
+      <h2> PrayerIT </h2>
+      <i class="pi pi-sparkles"> </i>
+
+      <v-img alt="Vue logo" src="@/assets/logo.svg" contain max-width="125" max-height="125" class="ma-4" />
+  
       <nav>
         <RouterLink to="/">
           <v-btn text class="mx-2">
             Prayers
           </v-btn>
         </RouterLink>
-        <RouterLink to="/about">
+        <RouterLink to="/testimony">
           <v-btn text class="mx-2">
             Testimonies
           </v-btn>
@@ -60,4 +66,9 @@ nav {
   text-transform: none;
   font-size: 16px;
 }
+ 
+h2 {
+  margin-left: 1rem;
+}
+
 </style>
