@@ -20,7 +20,7 @@ const register = async () => {
 };
 
 const goToLogin = () => {
-  router.push('/login');
+  router.push('/');
 };
 </script>
 
@@ -45,6 +45,7 @@ const goToLogin = () => {
       ></v-text-field>
       <v-btn type="submit" color="primary">Signup</v-btn>
     </v-form>
+    <br>
     <v-btn text @click="goToLogin">Already have an account? Login</v-btn>
   </v-container>
 </template>
