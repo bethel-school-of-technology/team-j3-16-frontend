@@ -7,6 +7,8 @@
     <ProfilePage ref="profilepage" />
 
     <h1> All Posts </h1>
+    
+    <p>test</p>
     <!-- <HomeConfig ref="homeconfig" /> -->
 
   </div>
