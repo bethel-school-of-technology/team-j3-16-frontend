@@ -40,3 +40,4 @@ const goToSignup = () => {
     </v-form>
     <v-btn text @click="goToSignup">Don't have an account? Signup</v-btn>
   </v-container>
+</template>
