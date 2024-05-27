@@ -11,8 +11,11 @@
     "test:unit": "vitest"
   },
   "dependencies": {
+    "@mapbox/mapbox-gl-geocoder": "^5.0.2",
     "@mdi/font": "^7.4.47",
+    "@studiometa/vue-mapbox-gl": "^2.5.0",
     "axios": "^1.6.8",
+    "mapbox-gl": "^3.4.0",
     "pinia": "^2.1.7",
     "primeicons": "^7.0.0",
     "sass": "^1.77.2",
