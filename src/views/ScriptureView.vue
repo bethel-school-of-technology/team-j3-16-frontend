@@ -111,12 +111,14 @@ export default {
 
 <style>
 @media (min-width: 1024px) {
+
   .scripture {
     min-height: 100vh;
     display: flex;
     align-items: center;
   }
 }
+
 
 .scripture {
   text-align: center;
@@ -139,4 +141,5 @@ export default {
  .versesBox {
   margin: 1.5rem;
 }
+
 </style>

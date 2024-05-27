@@ -21,6 +21,8 @@ const toggleLike = () => {
 };
 </script>
 
+
+
 <template>
   <v-card class="my-2">
     <v-card-text>
@@ -41,6 +43,8 @@ const toggleLike = () => {
     </v-card-actions>
   </v-card>
 </template>
+
+
 
 <style scoped>
 .v-card {

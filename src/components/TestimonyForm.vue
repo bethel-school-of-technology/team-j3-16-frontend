@@ -19,17 +19,19 @@
   </div>
 </template>
 
+
+
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import TestimonyPostCard from './TestimonyPostCard.vue';
 
 // Simulating a logged-in user
-const user = ref({
-  id: 1,
-  name: 'John Doe',
-  email: 'john.doe@example.com',
-});
+// const user = ref({
+//   id: 1,
+//   name: 'John Doe',
+//   email: 'john.doe@example.com',
+// });
 
 const formData = ref({
   testimony: '',
@@ -49,6 +51,11 @@ const fetchTestimonies = async () => {
       type: 'Testimony',
       date: new Date(testimony.date).toLocaleDateString(),
     }));
+
+      // Combine and sort posts by date
+      posts.value = [...testimonyPosts].sort(
+      (a, b) => new Date(b.date) - new Date(a.date)
+    );
   } catch (error) {
     console.error('Error fetching testimonies:', error);
     testimonies.value = []; // Ensure testimonies is empty if there's an error
@@ -85,6 +92,7 @@ onMounted(() => {
   fetchTestimonies();
 });
 </script>
+
 
 <style scoped>
 .testimony-feed {

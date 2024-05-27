@@ -13,7 +13,6 @@ import MockPreview from '../components/MockPreview.vue';
     <PrayerForm />
     <!-- <MockPreview /> -->
 
-
   </div>
 </template>
 

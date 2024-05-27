@@ -19,17 +19,19 @@
   </div>
 </template>
 
+
+
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import PrayerPostCard from './PrayerPostCard.vue';
 
 // Simulating a logged-in user
-const user = ref({
-  id: 1,
-  name: 'John Doe',
-  email: 'john.doe@example.com',
-});
+// const user = ref({
+//   id: 1,
+//   name: 'John Doe',
+//   email: 'john.doe@example.com',
+// });
 
 const formData = ref({
   prayerRequest: '',
@@ -41,7 +43,7 @@ const form = ref(null);
 const posts = ref([]);
 
 // Function to fetch posts from the backend
-const fetchPosts = async () => {
+const fetchPrayers = async () => {
   try {
     // Fetch prayer requests
     const prayerResponse = await axios.get('your-backend-url/prayer-requests');
@@ -51,20 +53,12 @@ const fetchPosts = async () => {
       date: new Date(post.date).toLocaleDateString(),
     }));
 
-    // Fetch testimonies to show them on the home page too
-    const testimonyResponse = await axios.get('your-backend-url/testimonies');
-    const testimonyPosts = testimonyResponse.data.map(post => ({
-      ...post,
-      type: 'Testimony',
-      date: new Date(post.date).toLocaleDateString(),
-    }));
-
     // Combine and sort posts by date
-    posts.value = [...prayerPosts, ...testimonyPosts].sort(
+    posts.value = [...prayerPosts].sort(
       (a, b) => new Date(b.date) - new Date(a.date)
     );
   } catch (error) {
-    console.error('Error fetching posts:', error);
+    console.error('Error fetching prayer requests:', error);
     posts.value = []; // Ensure posts is empty if there's an error
   }
 };
@@ -98,9 +92,10 @@ const submitForm = async () => {
 
 // Fetch posts on component mount
 onMounted(() => {
-  fetchPosts();
+  fetchPrayers();
 });
 </script>
+
 
 <style scoped>
 .posts-feed {
