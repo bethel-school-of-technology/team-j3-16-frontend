@@ -7,11 +7,11 @@ const LoginView = () => import('../views/LoginView.vue');
 const SignupView = () => import('../views/SignupView.vue');
 
 const routes = [
-  { path: '/', name: 'home', component: HomeView },
+  { path: '/', name: 'login', component: LoginView },
+  { path: '/home', name: 'home', component: HomeView },
+  { path: '/signup', name: 'signup', component: SignupView },
   { path: '/profile', name: 'profile', component: ProfileView },
   { path: '/scripture', name: 'scripture', component: ScriptureView },
-  { path: '/login', name: 'login', component: LoginView },
-  { path: '/signup', name: 'signup', component: SignupView },
   { path: '/testimony', name: 'testimony', component: () => import('../views/TestimonyView.vue') },
 ];
 

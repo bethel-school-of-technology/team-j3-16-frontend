@@ -20,7 +20,7 @@ import 'primeicons/primeicons.css'
 
   
       <nav>
-        <RouterLink to="/">
+        <RouterLink to="/home">
           <v-btn text class="mx-2">
             Prayers
           </v-btn>
