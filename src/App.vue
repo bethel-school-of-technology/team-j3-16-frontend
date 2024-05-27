@@ -18,7 +18,6 @@ import 'primeicons/primeicons.css'
       <h2> PrayerIT </h2>
       <i class="pi pi-sparkles"> </i>
 
-      <v-img alt="Vue logo" src="@/assets/logo.svg" contain max-width="125" max-height="125" class="ma-4" />
   
       <nav>
         <RouterLink to="/">
