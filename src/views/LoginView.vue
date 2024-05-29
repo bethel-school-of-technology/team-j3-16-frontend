@@ -1,17 +1,17 @@
 <script setup>
 import { ref } from 'vue';
-import { useStore } from 'vuex';
+import { useAuthStore } from '@/stores/auth';
 import { useRouter } from 'vue-router';
 
 const username = ref('');
 const password = ref('');
-const store = useStore();
+const authStore = useAuthStore();
 const router = useRouter();
 
 const login = async () => {
   try {
-    await store.dispatch('auth/login', { username: username.value, password: password.value });
-    router.push('/');
+    await authStore.login({ username: username.value, password: password.value });
+    router.push('/home');
   } catch (error) {
     console.error('Login failed:', error);
   }
