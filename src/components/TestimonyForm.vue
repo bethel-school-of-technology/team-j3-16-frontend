@@ -43,7 +43,7 @@ const testimonies = ref([]);
 // Function to fetch testimonies from the backend
 const fetchTestimonies = async () => {
   try {
-    const response = await axios.get('your-backend-url/testimonies');
+    const response = await axios.get('/api/testimony');
     testimonies.value = response.data.map(testimony => ({
       ...testimony,
       type: 'Testimony',
@@ -67,7 +67,7 @@ const submitForm = async () => {
     };
 
     try {
-      const response = await axios.post('your-backend-url/testimonies', postData);
+      const response = await axios.post('/api/testimony', postData);
       testimonies.value.push({
         ...response.data,
         type: 'Testimony',

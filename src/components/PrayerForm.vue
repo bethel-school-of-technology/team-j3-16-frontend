@@ -44,7 +44,7 @@ const posts = ref([]);
 const fetchPosts = async () => {
   try {
     // Fetch prayer requests
-    const prayerResponse = await axios.get('your-backend-url/prayer-requests');
+    const prayerResponse = await axios.get('api/prayer');
     const prayerPosts = prayerResponse.data.map(post => ({
       ...post,
       type: 'Prayer',
@@ -52,7 +52,7 @@ const fetchPosts = async () => {
     }));
 
     // Fetch testimonies to show them on the home page too
-    const testimonyResponse = await axios.get('your-backend-url/testimonies');
+    const testimonyResponse = await axios.get('/api/testimony');
     const testimonyPosts = testimonyResponse.data.map(post => ({
       ...post,
       type: 'Testimony',
@@ -81,7 +81,7 @@ const submitForm = async () => {
     };
 
     try {
-      const response = await axios.post('your-backend-url/prayer-requests', postData);
+      const response = await axios.post('/api/prayer', postData);
       posts.value.push({
         ...response.data,
         type: 'Prayer',
