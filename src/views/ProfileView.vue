@@ -7,7 +7,6 @@
     <ProfilePage ref="profilepage" />
 
     <h1> All Posts </h1>
-    
     <p>test</p>
     <!-- <HomeConfig ref="homeconfig" /> -->
 
@@ -37,6 +36,7 @@ export default {
     fetchTestimonies() { this.$refs.profilePage.fetchTestimonies(); },
 
     showUserInfo() { this.$refs.profilePage.showUserInfo(); },
+    toggleEdit() { this.$refs.profilePage.toggleEdit() },
     mounted() { this.showUserInfo(); }
   }
 }

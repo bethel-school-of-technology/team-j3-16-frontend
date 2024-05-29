@@ -1,25 +1,57 @@
-<script setup>
+<script > // DELETED SETUP
 import { ref } from 'vue';
-import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
 
-const username = ref('');
-const password = ref('');
-const store = useStore();
-const router = useRouter();
 
-const login = async () => {
-  try {
-    await store.dispatch('auth/login', { username: username.value, password: password.value });
-    router.push('/');
-  } catch (error) {
-    console.error('Login failed:', error);
+export default {
+  name: 'Login',
+  setup() {
+      const username = ref('');
+      const password = ref('');
+      const router = useRouter();
+
+      const login = async () => {
+        try {
+
+          const loginResponse = await axios.post('http://localhost:3000/api/user/login', {
+            username: username.value,
+            password: password.value
+          });
+
+          const { username: existingUser, password: existingPass, token } = loginResponse.data
+          localStorage.setItem('signUserToken', token);
+
+          console.log(loginResponse.data);
+
+            if (loginResponse.data) {
+              console.log('Successfully logged in:', username.value);
+              router.push('/home');
+
+            } else {
+              console.log('Error: Invalid user credentials')
+            }
+
+        } catch (error) {
+          console.error('Login failed:', error);
+          }
+        };
+
+
+      const goToSignup = () => {
+        router.push('/signup');
+      };
+
+    return {
+      username,
+      password,
+      login,
+      goToSignup
+    };
+
   }
-};
+}
 
-const goToSignup = () => {
-  router.push('/signup');
-};
 </script>
 
 <template>
@@ -38,6 +70,7 @@ const goToSignup = () => {
       ></v-text-field>
       <v-btn type="submit" color="primary">Login</v-btn>
     </v-form>
+    
     <v-btn text @click="goToSignup">Don't have an account? Signup</v-btn>
   </v-container>
 </template>

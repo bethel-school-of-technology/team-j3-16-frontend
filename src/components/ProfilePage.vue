@@ -2,6 +2,9 @@
 <script>
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import VueJwtDecode from 'vue-jwt-decode'
+
 
 export default {
   name: 'ProfilePage',
@@ -11,32 +14,69 @@ export default {
     const city_state = ref('');
     const country = ref('');
     const isEditing = ref(false);
+    const router = useRouter();
 
     const showUserInfo = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/user');
-        console.log('UserList:', response.data);
+        const token = localStorage.getItem('signUserToken');
+        if (!token) {
+          console.log('Login required');
+          router.push('/login');
+          return;
+        } else {
 
-        localStorage.setItem('myUserList', JSON.stringify(response.data));
+          const decodedToken = VueJwtDecode.decode(token);
+          const userId = decodedToken.userId;
+          console.log(userId)
 
-        const info = response.data[0]; ///ADDED [0] TO SAMPLE INFO
-        username.value = info.username;
-        password.value = info.password;
-        city_state.value = info.city_state;
-        country.value = info.country;
+          const response = await axios.get(`http://localhost:3000/api/user/${userId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+            
+          });
 
-        console.log('User info:', info);
+          const info = response.data.searchUser;
+          username.value = info.username;
+          password.value = info.password;
+          city_state.value = info.city_state;
+          country.value = info.country;
+
+          console.log('User info:', info);
+        }
       } catch (error) {
         console.error('Error fetching user info:', error);
         throw error;
       }
     };
 
-    const toggleEdit = () => {
+    const toggleEdit = async () => {
 
       if (isEditing.value) {
-        saveUserInfo;
+        try {
+
+          const token = localStorage.getItem('signUserToken');
+
+          const decodedToken = VueJwtDecode.decode(token);
+          const userId = decodedToken.userId;
+
+          await axios.put(`http://localhost:3000/api/user/${userId}`, {
+            password: password.value,
+            city_state: city_state.value,
+            country: country.value
+          }, {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+
+            console.log('User info updated successfully');
+
+        } catch (error) {
+          console.error('Error updating user info:', error);
+        }
       }
+
       isEditing.value = !isEditing.value;
     };
 
@@ -45,20 +85,20 @@ export default {
       showUserInfo();
     };
 
-    const saveUserInfo = async () => {
-      try {
-        const updatedInfo = {
-          password: password.value,
-          city_state: city_state.value,
-          country: country.value
-        };
-        await axios.put('http://localhost:3000/api/user', updatedInfo);
-        console.log('User info saved:', updatedInfo);
-      } catch (error) {
-        console.error('Error saving user info:', error);
-        throw error;
-      }
-    };
+    // const saveUserInfo = async () => {
+    //   try {
+    //     const updatedInfo = {
+    //       password: password.value,
+    //       city_state: city_state.value,
+    //       country: country.value
+    //     };
+    //     await axios.put('http://localhost:3000/api/user', updatedInfo);
+    //     console.log('User info saved:', updatedInfo);
+    //   } catch (error) {
+    //     console.error('Error saving user info:', error);
+    //     throw error;
+    //   }
+    // };
 
     onMounted(() => {
       showUserInfo();
