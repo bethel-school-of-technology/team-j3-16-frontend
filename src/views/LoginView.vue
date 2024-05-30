@@ -70,7 +70,7 @@ export default {
       ></v-text-field>
       <v-btn type="submit" color="primary">Login</v-btn>
     </v-form>
-    
+    <br>
     <v-btn text @click="goToSignup">Don't have an account? Signup</v-btn>
   </v-container>
 </template>
