@@ -10,9 +10,9 @@ const props = defineProps({
 <template>
   <v-card class="my-2">
     <v-card-text>
-      <div><strong>{{ post.userName }}</strong> <small>{{ post.date }}</small></div>
+      <div><strong>{{ post.postedBy.username }}</strong> <small>{{ post.date }}</small></div>
       <v-chip class="my-2" :color="post.type === 'Prayer' ? 'primary' : 'secondary'" label>{{ post.type }}</v-chip>
-      <div>{{ post.content }}</div>
+      <div>{{ post.testimony }}</div>
     </v-card-text>
   </v-card>
 </template>
