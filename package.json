@@ -15,6 +15,7 @@
     "@mdi/font": "^7.4.47",
     "@studiometa/vue-mapbox-gl": "^2.5.0",
     "axios": "^1.6.8",
+    "jwt-decode": "^4.0.0",
     "mapbox-gl": "^3.4.0",
     "pinia": "^2.1.7",
     "primeicons": "^7.0.0",
@@ -23,11 +24,13 @@
     "serve": "^14.2.3",
     "vite-plugin-vuetify": "^2.0.3",
     "vue": "^3.4.21",
+    "vue-jwt-decode": "^0.1.0",
     "vue-router": "^4.3.0",
     "vuetify": "^3.6.0-beta.0.0",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
+    "@types/jwt-decode": "^3.1.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vue/test-utils": "^2.4.5",
     "jsdom": "^24.0.0",

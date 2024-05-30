@@ -13,6 +13,8 @@
 
 
 <script>
+import { onMounted } from 'vue';
+
 export default {
   name: 'VersesEvent',
   data() {
@@ -131,6 +133,20 @@ export default {
       this.fetchVerse("psalms+3:3");
       this.fetchVerse("john+16:33");
       this.fetchVerse("1peter+4:12-13");
+     },
+
+     onMounted() {
+      this.fetchVerse();
+      this.health();
+      this.faith();
+      this.finance();
+      this.love();
+      this.family();
+      this.loss();
+      this.anger();
+      this.stress();
+      this.pride();
+      this.depression();
      }
   }
 

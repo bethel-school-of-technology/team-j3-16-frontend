@@ -6,6 +6,7 @@ const props = defineProps({
 });
 </script>
 
+
 <template>
   <v-card class="my-2">
     <v-card-text>
