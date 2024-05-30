@@ -1,3 +1,71 @@
+<script setup>
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
+import TestimonyPostCard from './TestimonyPostCard.vue';
+import VueJwtDecode from 'vue-jwt-decode'
+
+
+const formData = ref({
+  testimony: '',
+});
+
+const form = ref(null);
+
+// // Reactive reference to an empty array - vue3 composition api
+const testimonies = ref([]);
+
+// Function to fetch testimonies from the backend --> response.data updates the reactive reference with fetched data from the backend
+const fetchTestimonies = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/api/testimony');
+    testimonies.value = response.data.map(testimony => ({
+      ...testimony,
+      type: 'Testimony',
+      date: new Date(testimony.testyDate).toLocaleString(),
+    }));
+
+      // Combine and sort posts by date
+    //   posts.value = [...testimonyPosts].sort(
+    //   (a, b) => new Date(b.date) - new Date(a.date)
+    // );
+  } catch (error) {
+    console.error('Error fetching testimonies:', error);
+    testimonies.value = []; // Ensure testimonies is empty if there's an error
+  }
+  console.log(testimonies);
+};
+
+// Function to submit form
+const submitForm = async () => {
+  if (form.value.validate()) {
+    try {
+      const token = localStorage.getItem('signUserToken');
+      const decodedToken = VueJwtDecode.decode(token);
+      const userId = decodedToken.userId;
+
+      const response = await axios.post('http://localhost:3000/api/testimony', 
+      {
+        testimony: formData.value.testimony,
+      }, 
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      fetchTestimonies();
+    } catch (error) {
+      console.error('Error posting testimony:', error);
+    }
+  }
+};
+
+// Fetch testimonies on component mount
+onMounted(() => {
+  fetchTestimonies();
+});
+</script>
+
 <template>
   <div>
     <!-- Testimony form -->
@@ -18,80 +86,6 @@
     </div>
   </div>
 </template>
-
-
-
-<script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import TestimonyPostCard from './TestimonyPostCard.vue';
-
-// Simulating a logged-in user
-// const user = ref({
-//   id: 1,
-//   name: 'John Doe',
-//   email: 'john.doe@example.com',
-// });
-
-const formData = ref({
-  testimony: '',
-});
-
-const form = ref(null);
-
-// State for testimonies
-const testimonies = ref([]);
-
-// Function to fetch testimonies from the backend
-const fetchTestimonies = async () => {
-  try {
-    const response = await axios.get('your-backend-url/testimonies');
-    testimonies.value = response.data.map(testimony => ({
-      ...testimony,
-      type: 'Testimony',
-      date: new Date(testimony.date).toLocaleDateString(),
-    }));
-
-      // Combine and sort posts by date
-      posts.value = [...testimonyPosts].sort(
-      (a, b) => new Date(b.date) - new Date(a.date)
-    );
-  } catch (error) {
-    console.error('Error fetching testimonies:', error);
-    testimonies.value = []; // Ensure testimonies is empty if there's an error
-  }
-};
-
-// Function to submit form
-const submitForm = async () => {
-  if (form.value.validate()) {
-    const postData = {
-      userId: user.value.id,
-      userName: user.value.name,
-      content: formData.value.testimony,
-      type: 'Testimony',
-      date: new Date().toISOString(),
-    };
-
-    try {
-      const response = await axios.post('your-backend-url/testimonies', postData);
-      testimonies.value.push({
-        ...response.data,
-        type: 'Testimony',
-        date: new Date(response.data.date).toLocaleDateString(),
-      });
-      formData.value.testimony = ''; // Reset the testimony field
-    } catch (error) {
-      console.error('Error posting testimony:', error);
-    }
-  }
-};
-
-// Fetch testimonies on component mount
-onMounted(() => {
-  fetchTestimonies();
-});
-</script>
 
 
 <style scoped>
