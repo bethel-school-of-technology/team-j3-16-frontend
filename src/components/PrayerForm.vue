@@ -1,62 +1,31 @@
-<template>
-  <div>
-    <!-- Prayer request form -->
-    <v-form @submit.prevent="submitForm" ref="form">
-      <v-text-field
-        v-model="formData.prayerRequest"
-        label="Prayer Request"
-        required
-      ></v-text-field>
-
-      <v-btn type="submit" color="primary">Submit</v-btn>
-    </v-form>
-
-    <!-- Posts feed, only displayed if there are posts -->
-    <div v-if="posts.length > 0" class="posts-feed">
-      <v-divider class="my-4"></v-divider>
-      <PrayerPostCard v-for="post in posts" :key="post.id" :post="post" />
-    </div>
-  </div>
-</template>
-
-
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import PrayerPostCard from './PrayerPostCard.vue';
+import VueJwtDecode from 'vue-jwt-decode'
 
-// Simulating a logged-in user
-// const user = ref({
-//   id: 1,
-//   name: 'John Doe',
-//   email: 'john.doe@example.com',
-// });
 
 const formData = ref({
   prayerRequest: '',
 });
 
 const form = ref(null);
-
-// State for posts
 const posts = ref([]);
 
-// Function to fetch posts from the backend
+
 const fetchPrayers = async () => {
   try {
-    // Fetch prayer requests
-    const prayerResponse = await axios.get('your-backend-url/prayer-requests');
-    const prayerPosts = prayerResponse.data.map(post => ({
-      ...post,
+   
+    const response = await axios.get('http://localhost:3000/api/prayer');
+    posts.value = response.data.map(prayers => ({
+      ...prayers,
       type: 'Prayer',
-      date: new Date(post.date).toLocaleDateString(),
-    }));
+      date: new Date(prayers.postDate).toLocaleString(),
+    })).sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
 
-    // Combine and sort posts by date
-    posts.value = [...prayerPosts].sort(
-      (a, b) => new Date(b.date) - new Date(a.date)
-    );
   } catch (error) {
     console.error('Error fetching prayer requests:', error);
     posts.value = []; // Ensure posts is empty if there's an error
@@ -66,24 +35,24 @@ const fetchPrayers = async () => {
 // Function to submit form
 const submitForm = async () => {
   if (form.value.validate()) {
-    const postData = {
-      userId: user.value.id,
-      userName: user.value.name,
-      content: formData.value.prayerRequest,
-      type: 'Prayer',
-      date: new Date().toISOString(),
-    };
-
     try {
-      const response = await axios.post('your-backend-url/prayer-requests', postData);
-      posts.value.push({
-        ...response.data,
-        type: 'Prayer',
-        date: new Date(response.data.date).toLocaleDateString(),
+      const token = localStorage.getItem('signUserToken');
+      const decodedToken = VueJwtDecode.decode(token);
+      const userId = decodedToken.userId;
+
+      const response = await axios.post('http://localhost:3000/api/prayer', 
+      {
+        prayerReq: formData.value.prayerReq,
+      }, 
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       });
-      formData.value.prayerRequest = ''; // Reset the prayer request field
-      // Sort posts after adding new one
-      posts.value = posts.value.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+      fetchPrayers();
+      formData.value.prayerReq = ''; // Clear the text-field after submission
+      
     } catch (error) {
       console.error('Error posting prayer request:', error);
     }
@@ -94,11 +63,36 @@ const submitForm = async () => {
 onMounted(() => {
   fetchPrayers();
 });
+
 </script>
 
 
+
+<template>
+  <div>
+    <!-- Prayer request form -->
+    <v-form @submit.prevent="submitForm" ref="form">
+      <v-text-field
+        v-model="formData.prayerReq"
+        label="Prayer Request"
+        required
+      ></v-text-field>
+
+      <v-btn type="submit" color="primary">Submit</v-btn>
+    </v-form>
+
+    <!-- Posts feed, only displayed if there are posts -->
+    <div v-if="posts.length > 0" class="requests-feed">
+      <v-divider class="my-4"></v-divider>
+
+      <PrayerPostCard v-for="prayerReq in posts" :key="prayerReq.id" :post="prayerReq" />
+    </div>
+  </div>
+</template>
+
+
 <style scoped>
-.posts-feed {
+.requests-feed {
   margin-top: 20px;
 }
 

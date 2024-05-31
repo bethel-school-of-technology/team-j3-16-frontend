@@ -2,6 +2,7 @@
 import PrayerForm from '../components/PrayerForm.vue';
 import TestimonyForm from '../components/TestimonyForm.vue';
 import MapboxCluster from '../components/MapboxCluster.vue'
+import FeedConfig from '@/components/FeedConfig.vue';
 
 
 </script>
@@ -9,10 +10,14 @@ import MapboxCluster from '../components/MapboxCluster.vue'
 <template>
   <div>
     <h1>Global Active Prayer Network</h1>
-    <PrayerForm />
-    <!-- <FeedConfig/> -->
-<br>
+     <PrayerForm />
     <MapboxCluster />
+    
+   
+    <!-- <FeedConfig /> -->
+
+    <br>
+    
 
   </div>
 </template>
