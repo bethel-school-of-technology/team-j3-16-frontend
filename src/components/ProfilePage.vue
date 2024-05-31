@@ -146,7 +146,7 @@ export default {
         </v-col>
         <v-col>
 
-          <span v-if="!isEditing">{{ password }}</span>
+          <span v-if="!isEditing">*****</span>
           <v-text-field 
             v-if="isEditing"  
             outlined

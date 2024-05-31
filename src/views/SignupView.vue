@@ -24,7 +24,7 @@ export default {
 
         if (response.status === 201) {
           console.log('Sign up success: ', username.value);
-          router.push('/home');
+          router.push('/');
         } else {
           console.log('Error, try signing up again: ', username.value);
         }
