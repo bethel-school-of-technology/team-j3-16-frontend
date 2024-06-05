@@ -1,24 +1,23 @@
 <script setup>
 import { ref } from 'vue';
-import { useStore } from 'vuex';
 import { useRouter, RouterLink, RouterView } from 'vue-router';
 import { VApp, VAppBar, VMain, VContainer, VBtn, VImg, VIcon, VSpacer } from 'vuetify/components';
 import 'vuetify/styles';
-import 'primeicons/primeicons.css'
+import 'primeicons/primeicons.css';
 
+const router = useRouter();
 
+const signOut = () => {
+  router.push('/');
+};
 </script>
-
-
 
 <template>
   <v-app>
     <v-app-bar app>
-
       <h2> PrayerIT </h2>
-      <i class="pi pi-sparkles"> </i>
+      <i class="pi pi-sparkles"></i>
 
-  
       <nav>
         <RouterLink to="/home">
           <v-btn text class="mx-2">
@@ -38,11 +37,16 @@ import 'primeicons/primeicons.css'
 
         <v-spacer></v-spacer>
 
-        <RouterLink :to="{ name: 'profile', params: { username: 'mark2021' } }">
+        <RouterLink to="/profile">
           <v-btn icon>
             <v-icon>mdi-account</v-icon>
           </v-btn>
         </RouterLink>
+
+        <!-- Logout Button -->
+        <v-btn text @click="signOut" class="mx-2">
+          Logout
+        </v-btn>
       </nav>
     </v-app-bar>
 
@@ -65,9 +69,8 @@ nav {
   text-transform: none;
   font-size: 16px;
 }
- 
+
 h2 {
   margin-left: 1rem;
 }
-
 </style>

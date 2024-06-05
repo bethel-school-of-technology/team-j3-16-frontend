@@ -10,8 +10,9 @@ import FeedConfig from '@/components/FeedConfig.vue';
 <template>
   <div>
     <h1>Global Active Prayer Network</h1>
-     <PrayerForm />
     <MapboxCluster />
+     <PrayerForm />
+   
     
    
     <!-- <FeedConfig /> -->

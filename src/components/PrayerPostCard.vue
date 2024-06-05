@@ -4,6 +4,7 @@
 import { ref, onMounted } from 'vue';
 import { defineProps } from 'vue';
 import axios from 'axios';
+import 'primeicons/primeicons.css';
 
 
 const props = defineProps({
