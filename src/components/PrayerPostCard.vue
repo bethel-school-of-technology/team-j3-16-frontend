@@ -4,7 +4,8 @@
 import { ref, onMounted } from 'vue';
 import { defineProps } from 'vue';
 import axios from 'axios';
-import 'primeicons/primeicons.css';
+import SvgIcon from '@jamescoyle/vue-icon'
+import { mdiHandsPray } from '@mdi/js'
 
 
 const props = defineProps({
@@ -22,8 +23,6 @@ const toggleLike = () => {
   } else {
     likes.value++;
   } 
-  
-  // isLiked.value = !isLiked.value;
 };
 
 
@@ -44,7 +43,7 @@ const findUsername = async () => {
       }
 };
 
-onMounted(() => {
+onMounted(() => { 
   findUsername();
 });
 
@@ -67,19 +66,27 @@ onMounted(() => {
 
     <v-card-actions>
       <v-btn icon @click="toggleLike">
-        <v-icon>{{ isLiked ? 'mdi-hand-pray' : 'mdi-hand-pray-outline' }}</v-icon>
+        
+          <svg-icon type="mdi" :path="mdiHandsPray"></svg-icon>
+    
       </v-btn>
       <span>{{ likes }}</span>
     </v-card-actions>
+
   </v-card>
 </template>
 
 
 
 <style scoped>
+.v-chip {
+  margin-bottom: 10px;
+}
+
 .v-card {
   margin-bottom: 20px;
 }
+
 .v-btn {
   margin-left: 8px;
 }

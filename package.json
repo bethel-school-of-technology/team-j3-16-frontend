@@ -11,8 +11,10 @@
     "test:unit": "vitest"
   },
   "dependencies": {
+    "@jamescoyle/vue-icon": "^0.1.2",
     "@mapbox/mapbox-gl-geocoder": "^5.0.2",
     "@mdi/font": "^7.4.47",
+    "@mdi/js": "^7.4.47",
     "@studiometa/vue-mapbox-gl": "^2.5.0",
     "axios": "^1.6.8",
     "jwt-decode": "^4.0.0",
@@ -29,7 +31,7 @@
     "vue-mapbox-gl": "^0.0.1",
     "vue-router": "^4.3.0",
     "vue3-mapbox": "^2.1.40",
-    "vuetify": "^3.6.0-beta.0.0",
+    "vuetify": "^3.6.8",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
