@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-import VueJwtDecode from 'vue-jwt-decode'
+import VueJwtDecode from 'vue-jwt-decode';
 
 
 export default {
@@ -15,6 +15,7 @@ export default {
     const country = ref('');
     const isEditing = ref(false);
     const router = useRouter();
+
 
     const showUserInfo = async () => {
       try {
@@ -85,7 +86,6 @@ export default {
       showUserInfo();
     };
 
-  
 
     onMounted(() => {
       showUserInfo();
@@ -133,7 +133,7 @@ export default {
         </v-col>
         <v-col>
 
-          <span v-if="!isEditing">*****</span>
+          <span v-if="!isEditing">* * * * *</span>
           <v-text-field 
             v-if="isEditing"  
             outlined
@@ -195,14 +195,6 @@ export default {
 
     </v-card-actions>
   </v-card>
-
-  </div>
-
-  <div class="profileFeed">
-
-      <!-- {{  this.fetchPosts() }} -->
-        
-      <!-- <all-posts ref="fetchPosts"></all-posts> -->
 
   </div>
 

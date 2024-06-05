@@ -1,4 +1,32 @@
 
+<script>
+
+import ProfilePage from '@/components/ProfilePage.vue';
+import ProfileFeed from '../components/ProfileFeed.vue';
+
+
+export default {
+
+  name: 'ProfileView',
+  components: {
+    ProfilePage,
+    ProfileFeed
+  },
+  methods: {
+
+    showUserInfo() { this.$refs.profilePage.showUserInfo(); },
+    toggleEdit() { this.$refs.profilePage.toggleEdit() },
+    
+    showUserPosts() { this.$refs.profileFeed.showUserPosts(); },
+
+    onMounted() { this.showUserInfo(); this.showUserPosts(); }
+  }
+}
+
+</script>
+
+
+
 <template>
   
   <div class="profileView">
@@ -7,41 +35,14 @@
     <ProfilePage ref="profilepage" />
 
     <h1> All Posts </h1>
-    <p>test</p>
-    <!-- <HomeConfig ref="homeconfig" /> -->
+
+    <ProfileFeed ref="profilefeed" />
+
+    <br>
 
   </div>
 
 </template>
-
-
-<script>
-
-import PrayerForm from '@/components/PrayerForm.vue';
-import ProfilePage from '@/components/ProfilePage.vue';
-import TestimonyForm from '@/components/TestimonyForm.vue';
-
-
-export default {
-
-  name: 'ProfileView',
-  components: {
-    ProfilePage,
-    PrayerForm,
-    TestimonyForm
-  },
-  methods: {
-
-    fetchPrayers() { this.$refs.profilePage.fetchPrayers(); },
-    fetchTestimonies() { this.$refs.profilePage.fetchTestimonies(); },
-
-    showUserInfo() { this.$refs.profilePage.showUserInfo(); },
-    toggleEdit() { this.$refs.profilePage.toggleEdit() },
-    mounted() { this.showUserInfo(); }
-  }
-}
-
-</script>
 
 
 
