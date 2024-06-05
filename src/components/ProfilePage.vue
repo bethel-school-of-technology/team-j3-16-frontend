@@ -11,7 +11,8 @@ export default {
   setup() {
     const username = ref('');
     const password = ref('');
-    const city_state = ref('');
+    const place = ref('');
+    const region = ref('');
     const country = ref('');
     const isEditing = ref(false);
     const router = useRouter();
@@ -40,7 +41,8 @@ export default {
           const info = response.data.searchUser;
           username.value = info.username;
           password.value = info.password;
-          city_state.value = info.city_state;
+          place.value = info.place;
+          region.value = info.region;
           country.value = info.country;
 
           console.log('User info:', info);
@@ -63,7 +65,8 @@ export default {
 
           await axios.put(`http://localhost:3000/api/user/${userId}`, {
             password: password.value,
-            city_state: city_state.value,
+            place: place.value,
+            region: region.value,
             country: country.value
           }, {
             headers: {
@@ -93,7 +96,8 @@ export default {
     return {
       username,
       password,
-      city_state,
+      place,
+      region,
       country,
       showUserInfo,
       isEditing,
@@ -148,16 +152,35 @@ export default {
     <v-card-text>
       <v-row>
         <v-col cols="auto">
-          <span class="label" >City, State:</span>
+          <span class="label" >City / Place:</span>
         </v-col>
         <v-col>
 
-          <span v-if="!isEditing"> {{ city_state }} </span>
+          <span v-if="!isEditing"> {{ place }} </span>
           <v-text-field
             v-if="isEditing"
             outlined
             dense
-            v-model="city_state"
+            v-model="place"
+          ></v-text-field>
+
+        </v-col>
+      </v-row>
+    </v-card-text>
+
+    <v-card-text>
+      <v-row>
+        <v-col cols="auto">
+          <span class="label" > State / Region</span>
+        </v-col>
+        <v-col>
+
+          <span v-if="!isEditing">{{ region }}</span>
+          <v-text-field
+            v-if="isEditing"
+            outlined
+            dense
+            v-model="region"
           ></v-text-field>
 
         </v-col>
