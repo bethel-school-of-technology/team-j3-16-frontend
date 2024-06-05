@@ -21,7 +21,7 @@ const signOut = () => {
       <h2> PrayerIT </h2>
       <i class="pi pi-sparkles"></i>
 
-      <nav>
+      <nav v-if="userStore.isLoggedIn">
         <RouterLink to="/home">
           <v-btn text class="mx-2">
             Prayers
@@ -46,8 +46,7 @@ const signOut = () => {
           </v-btn>
         </RouterLink>
 
-        <!-- Conditionally display the Logout button -->
-        <v-btn v-if="userStore.isLoggedIn" text @click="signOut" class="mx-2">
+        <v-btn text @click="signOut" class="mx-2">
           Logout
         </v-btn>
       </nav>
