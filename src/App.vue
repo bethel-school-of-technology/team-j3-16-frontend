@@ -1,16 +1,13 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter, RouterLink, RouterView } from 'vue-router';
-import { VApp, VAppBar, VMain, VContainer, VBtn, VIcon, VSpacer } from 'vuetify/components';
-import { useUserStore } from './stores/user';
+import { VApp, VAppBar, VMain, VContainer, VBtn, VImg, VIcon, VSpacer } from 'vuetify/components';
 import 'vuetify/styles';
 import 'primeicons/primeicons.css';
 
 const router = useRouter();
-const userStore = useUserStore();
 
 const signOut = () => {
-  userStore.logout();
   router.push('/');
 };
 </script>
@@ -21,7 +18,7 @@ const signOut = () => {
       <h2> PrayerIT </h2>
       <i class="pi pi-sparkles"></i>
 
-      <nav v-if="userStore.isLoggedIn">
+      <nav>
         <RouterLink to="/home">
           <v-btn text class="mx-2">
             Prayers
@@ -46,6 +43,7 @@ const signOut = () => {
           </v-btn>
         </RouterLink>
 
+        <!-- Logout Button -->
         <v-btn text @click="signOut" class="mx-2">
           Logout
         </v-btn>

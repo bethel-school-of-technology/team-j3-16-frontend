@@ -16,9 +16,8 @@
         v-for="feature in geojsonData"
         :key="feature.geometry.coordinates.toString()"
         :lng-lat="feature.geometry.coordinates"
-      >
-        <div>{{ feature.geometry.coordinates }}</div>
-      </MapboxMarker>
+        class="dot-marker"
+      />
     </MapboxMap>
     <div v-else>Loading...</div> <!-- Display loading text while data is loading -->
   </div>
@@ -105,6 +104,8 @@ watch(() => userStore.users, async (newUsers) => {
   height: 100%; 
   width: 100%; 
 }
+
+
 </style>
 
 
