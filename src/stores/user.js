@@ -2,7 +2,8 @@ import { defineStore } from 'pinia';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    users: []  // Initialize an empty array for users
+    users: [],  // Initialize an empty array for users
+    isLoggedIn: false,
   }),
   actions: {
     setUsers(users) {
@@ -16,28 +17,12 @@ export const useUserStore = defineStore('user', {
       if (index !== -1) {
         this.users[index] = updatedUser;
       }
-    }
+    },
+    login() {
+      this.isLoggedIn = true;
+    },
+    logout() {
+      this.isLoggedIn = false;
+    },
   }
 });
-
-
-
-
-
-
-
-// import { defineStore } from 'pinia';
-
-// export const useUserStore = defineStore('user', {
-//   state: () => ({
-//     user: null,
-//   }),
-//   actions: {
-//     setUser(user) {
-//       this.user = user;
-//     },
-//     clearUser() {
-//       this.user = null;
-//     },
-//   },
-// });

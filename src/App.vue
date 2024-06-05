@@ -1,13 +1,16 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter, RouterLink, RouterView } from 'vue-router';
-import { VApp, VAppBar, VMain, VContainer, VBtn, VImg, VIcon, VSpacer } from 'vuetify/components';
+import { VApp, VAppBar, VMain, VContainer, VBtn, VIcon, VSpacer } from 'vuetify/components';
+import { useUserStore } from './stores/user';
 import 'vuetify/styles';
 import 'primeicons/primeicons.css';
 
 const router = useRouter();
+const userStore = useUserStore();
 
 const signOut = () => {
+  userStore.logout();
   router.push('/');
 };
 </script>
@@ -43,8 +46,8 @@ const signOut = () => {
           </v-btn>
         </RouterLink>
 
-        <!-- Logout Button -->
-        <v-btn text @click="signOut" class="mx-2">
+        <!-- Conditionally display the Logout button -->
+        <v-btn v-if="userStore.isLoggedIn" text @click="signOut" class="mx-2">
           Logout
         </v-btn>
       </nav>
