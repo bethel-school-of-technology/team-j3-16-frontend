@@ -4,6 +4,7 @@ const HomeView = () => import('../views/HomeView.vue');
 const ProfileView = () => import('../views/ProfileView.vue');
 const ScriptureView = () => import('../views/ScriptureView.vue');
 const LoginView = () => import('../views/LoginView.vue');
+const SignoutView = () => import('../views/SignoutView.vue');
 const SignupView = () => import('../views/SignupView.vue');
 
 const routes = [
@@ -13,6 +14,7 @@ const routes = [
   { path: '/profile', name: 'profile', component: ProfileView },
   { path: '/scripture', name: 'scripture', component: ScriptureView },
   { path: '/testimony', name: 'testimony', component: () => import('../views/TestimonyView.vue') },
+  { path: '/signout', name: 'signout', component: SignoutView },
 ];
 
 const router = createRouter({

@@ -85,20 +85,7 @@ export default {
       showUserInfo();
     };
 
-    // const saveUserInfo = async () => {
-    //   try {
-    //     const updatedInfo = {
-    //       password: password.value,
-    //       city_state: city_state.value,
-    //       country: country.value
-    //     };
-    //     await axios.put('http://localhost:3000/api/user', updatedInfo);
-    //     console.log('User info saved:', updatedInfo);
-    //   } catch (error) {
-    //     console.error('Error saving user info:', error);
-    //     throw error;
-    //   }
-    // };
+  
 
     onMounted(() => {
       showUserInfo();
