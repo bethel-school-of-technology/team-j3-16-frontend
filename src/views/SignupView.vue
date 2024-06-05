@@ -9,7 +9,8 @@ export default {
   setup() {
     const username = ref('');
     const password = ref('');
-    const city_state = ref('');
+    const place = ref('');
+    const region = ref('');
     const country = ref('');
     const router = useRouter();
 
@@ -18,7 +19,8 @@ export default {
         const response = await axios.post('http://localhost:3000/api/user/register', {
           username: username.value,
           password: password.value,
-          city_state: city_state.value,
+          place: place.value,
+          region: region.value,
           country: country.value
         });
 
@@ -40,7 +42,8 @@ export default {
     return {
       username,
       password,
-      city_state,
+      place,
+      region,
       country,
       register,
       goToLogin
@@ -65,9 +68,13 @@ export default {
         required
       ></v-text-field>
       <v-text-field
-        v-model="city_state"
-        label="City, State"
+        v-model="place"
+        label="City / Place"
         required
+      ></v-text-field>
+      <v-text-field
+        v-model="region"
+        label="State / Province"
       ></v-text-field>
       <v-text-field
         v-model="country"
