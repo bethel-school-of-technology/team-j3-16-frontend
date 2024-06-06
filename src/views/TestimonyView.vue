@@ -15,14 +15,14 @@ const addTestimony = (testimony) => {
 <template>
 
     <h1>Testimonies</h1>
-
+<p>Share and testify to what He has done!</p>
+<br>
     <div class="testyForm">
+    
     <TestimonyForm />
     </div>
 
-    <div class="testyCards">
-      <TestimonyPostCard />
-    </div>
+
 
 </template>
 

@@ -10,6 +10,10 @@ const router = useRouter();
 const route = useRoute();
 const userStore = useUserStore();
 const isLoggedIn = computed(() => userStore.isLoggedIn);
+let showButton = ref(false);
+
+
+console.log(isLoggedIn.value);
 
 const signOut = () => {
   console.log('Logging out...');
@@ -18,12 +22,14 @@ const signOut = () => {
   console.log('Logged out. isLoggedIn:', isLoggedIn.value);
 };
 
-const showNavBar = ref(isLoggedIn.value || route.path === '/login');
+const showNavBar = ref(isLoggedIn.value || route.path === '/');
 
 // Watch for changes in the login status and route to update the navigation visibility
 watch([isLoggedIn, route], () => {
   showNavBar.value = isLoggedIn.value || route.path === '/';
-  console.log('Route or login status changed. showNavBar:', showNavBar.value);
+  console.log('Route or login status changed. showNavBar:', showNavBar.value, 'isLoggedIn:', isLoggedIn.value);
+  // showButton.value = isLoggedIn.value;
+  showButton.value = localStorage.getItem('signUserToken') !== null;
 });
 
 console.log('Component setup complete. Initial showNavBar:', showNavBar.value, 'isLoggedIn:', isLoggedIn.value);
@@ -64,9 +70,10 @@ console.log('Component setup complete. Initial showNavBar:', showNavBar.value, '
         </RouterLink>
 
         <!-- Logout Button -->
-        <v-btn  text @click="signOut" class="mx-2">
+        <v-btn v-if="showButton" text @click="signOut" class="mx-2">
           Logout
         </v-btn>
+        <!-- <span>show button: {{ showButton }}</span> -->
       </nav>
     </v-app-bar>
 

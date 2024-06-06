@@ -116,7 +116,7 @@ export default {
 
 <template>
 
-  <div class="profilePage">
+  <div class="flex-wrap justify-center">
 
     <v-card class="infoCard">
     <v-card-text>
@@ -225,39 +225,8 @@ export default {
 
 
 
-<style scoped>
-@media (min-width: 1024px) {
+<style >
 
-  .profilePage {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
 
-  .label {
-  font-weight: bold;
-  margin-right: 8px;
-  }
-
-  .value {
-    font-weight: bold;
-  }
-
-  
-.profile {
-  margin-left:3%;
-  margin-right: 3%;
-}
-
-.infoCard {
-  margin-bottom: 1rem;
-}
-
-}
-
-.profilePage {
-  background-color: powderblue;
-  margin-bottom: 1rem;
-}
 
 </style>

@@ -82,6 +82,7 @@ onMounted(() => {
     <!-- Testimonies feed, only displayed if there are testimonies -->
     <div v-if="testimonies.length > 0" class="testimony-feed">
       <v-divider class="my-4"></v-divider>
+      <h2>Wall of Remembrance</h2>
       <TestimonyPostCard v-for="testimony in testimonies" :key="testimony.id" :post="testimony" />
     </div>
   </div>

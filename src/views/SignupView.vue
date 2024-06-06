@@ -63,6 +63,8 @@ export default {
 
 <template>
   <v-container>
+  <h1>Signup</h1>
+  <br>
     <v-form @submit.prevent="register">
       <v-text-field
         v-model="username"

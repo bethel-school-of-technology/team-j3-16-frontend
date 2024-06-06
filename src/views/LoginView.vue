@@ -34,6 +34,8 @@ const goToSignup = () => {
 
 <template>
   <v-container>
+  <h1>Login</h1>
+  <br>
     <v-form @submit.prevent="login">
       <v-text-field v-model="username" label="Username" required></v-text-field>
       <v-text-field v-model="password" label="Password" type="password" required></v-text-field>

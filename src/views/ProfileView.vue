@@ -23,16 +23,18 @@ export default {
   }
 }
 
-</script>
+</script>a
 
 
 
 <template>
   
-  <div class="profileView">
+  <div class="flex-wrap justify-center">
 
     <h1>Profile Information </h1>
     <ProfilePage ref="profilepage" />
+<br>
+<br>
 
     <h1> All Posts </h1>
 
@@ -47,19 +49,6 @@ export default {
 
 
 <style>
-@media (min-width: 1024px) {
 
-  .profileView {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    background-color: lightslategray;
-  }
-
-}
-
-.profileView h1 {
-  background-color: powderblue;
-}
 
 </style>

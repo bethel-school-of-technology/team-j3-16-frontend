@@ -11,7 +11,7 @@ const props = defineProps({
 });
 
 const isLiked = ref(false);
-const likes = ref(props.post.likes || 0);
+const likes = ref(props?.post?.likes || 0);
 const userName = ref('');
 
 
@@ -51,9 +51,9 @@ onMounted(() => {
 <template>
   <v-card class="my-2">
     <v-card-text>
-      <div><strong>{{ userName }}</strong> <small>{{ post.date }}</small></div>
-      <v-chip class="my-2" :color="post.type === 'Prayer' ? 'primary' : 'secondary'" label>{{ post.type }}</v-chip>
-      <div>{{ post.testimony }}</div>
+      <div><strong>{{ userName }}</strong> <small>{{ post?.date }}</small></div>
+      <v-chip class="my-2" :color="post?.type === 'Prayer' ? 'primary' : 'secondary'" label>{{ post?.type }}</v-chip>
+      <div>{{ post?.testimony }}</div>
     </v-card-text>
 
 
