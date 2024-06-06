@@ -1,27 +1,3 @@
-<template>
-  <div class="map-container">
-    <MapboxMap
-      v-if="!isLoading" 
-      map-style="mapbox://styles/steink-key/clwpd72eo00oh01rb6eboatve" 
-      access-token="pk.eyJ1Ijoic3RlaW5rLWtleSIsImEiOiJjbHdwOW96MTMyYTBkMmp1ZjhtcG94dzVvIn0.MmUk4XrW8OeT7tchpMDrZw" 
-      :center="[-50, 60]" 
-      :zoom="1" 
-      :projection="'globe'" 
-      :attribution-control="true" 
-      :interactive="true" 
-      class="map"
-    >
-      <!-- Render markers for each feature in geojsonData -->
-      <MapboxMarker
-        v-for="feature in geojsonData"
-        :key="feature.geometry.coordinates.toString()"
-        :lng-lat="feature.geometry.coordinates"
-        class="dot-marker"
-      />
-    </MapboxMap>
-    <div v-else>Loading...</div> <!-- Display loading text while data is loading -->
-  </div>
-</template>
 
 <script setup>
 import { ref, watch, onMounted } from 'vue'; 
@@ -93,6 +69,33 @@ watch(() => userStore.users, async (newUsers) => {
   }
 }, { deep: true, immediate: true });
 </script>
+
+<template>
+  <div class="map-container">
+    <MapboxMap
+      v-if="!isLoading" 
+      map-style="mapbox://styles/steink-key/clwpd72eo00oh01rb6eboatve" 
+      access-token="pk.eyJ1Ijoic3RlaW5rLWtleSIsImEiOiJjbHdwOW96MTMyYTBkMmp1ZjhtcG94dzVvIn0.MmUk4XrW8OeT7tchpMDrZw" 
+      :center="[-50, 60]" 
+      :zoom="1" 
+      :projection="'globe'" 
+      :attribution-control="true" 
+      :interactive="true" 
+      class="map"
+    >
+      <!-- Render markers for each feature in geojsonData -->
+      <MapboxMarker
+        v-for="feature in geojsonData"
+        :key="feature.geometry.coordinates.toString()"
+        :lng-lat="feature.geometry.coordinates"
+        class="dot-marker"
+      />
+    </MapboxMap>
+    <div v-else>Loading...</div> <!-- Display loading text while data is loading -->
+  </div>
+</template>
+
+
 
 <style>
 .map-container {

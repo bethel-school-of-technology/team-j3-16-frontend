@@ -1,8 +1,10 @@
 
 <script>
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+
+const GStore = inject('GStore')
 
 export default {
   name: 'Signup',
@@ -22,9 +24,15 @@ export default {
           place: place.value,
           region: region.value,
           country: country.value
+          
         });
 
         if (response.status === 201) {
+          GStore.flashMessage = 'Signup Successful! Now login!'
+            setTimeout(() => {
+            GStore.flashMessage = ''
+            }, 3000)
+
           console.log('Sign up success: ', username.value);
           router.push('/');
         } else {
@@ -36,7 +44,7 @@ export default {
     };
 
     const goToLogin = () => {
-      router.push('/login');
+      router.push('/');
     };
 
     return {

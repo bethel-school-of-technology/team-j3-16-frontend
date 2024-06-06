@@ -2,27 +2,46 @@ import { defineStore } from 'pinia';
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    users: [],  // Initialize an empty array for users
-    isLoggedIn: false,
+    users: [],
+    user: null, //user's current state
+    token: null, // user's token
   }),
   actions: {
     setUsers(users) {
       this.users = users;
     },
-    addUser(user) {
-      this.users.push(user);
-    },
-    updateUser(updatedUser) {
-      const index = this.users.findIndex(user => user.id === updatedUser.id);
-      if (index !== -1) {
-        this.users[index] = updatedUser;
-      }
-    },
-    login() {
-      this.isLoggedIn = true;
+    login(user, token) {
+      this.user = user;
+      this.token = token;
     },
     logout() {
-      this.isLoggedIn = false;
+      this.user = null;
+      this.token = null;
+      localStorage.removeItem('signUserToken');
     },
-  }
+  },
+  getters: {
+    isLoggedIn: (state) => !!state.user,
+  },
 });
+
+
+
+
+
+
+// import { defineStore } from 'pinia';
+
+// export const useUserStore = defineStore('user', {
+//   state: () => ({
+//     user: null,
+//   }),
+//   actions: {
+//     setUser(user) {
+//       this.user = user;
+//     },
+//     clearUser() {
+//       this.user = null;
+//     },
+//   },
+// });

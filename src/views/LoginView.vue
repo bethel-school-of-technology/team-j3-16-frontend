@@ -1,73 +1,42 @@
-<script > // DELETED SETUP
+<script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import { useUserStore } from '@/stores/user';
 
+const username = ref('');
+const password = ref('');
+const router = useRouter();
+const userStore = useUserStore();
 
-export default {
-  name: 'Login',
-  setup() {
-      const username = ref('');
-      const password = ref('');
-      const router = useRouter();
+const login = async () => {
+  try {
+    const loginResponse = await axios.post('http://localhost:3000/api/user/login', {
+      username: username.value,
+      password: password.value,
+    });
 
-      const login = async () => {
-        try {
+    const { token, user } = loginResponse.data;
+    localStorage.setItem('signUserToken', token);
+    userStore.login(user, token); // Save user and token in the store
 
-          const loginResponse = await axios.post('http://localhost:3000/api/user/login', {
-            username: username.value,
-            password: password.value
-          });
-
-          const { username: existingUser, password: existingPass, token } = loginResponse.data
-          localStorage.setItem('signUserToken', token);
-
-          console.log(loginResponse.data);
-
-            if (loginResponse.data) {
-              console.log('Successfully logged in:', username.value);
-              router.push('/home');
-
-            } else {
-              console.log('Error: Invalid user credentials')
-            }
-
-        } catch (error) {
-          console.error('Login failed:', error);
-          }
-        };
-
-
-      const goToSignup = () => {
-        router.push('/signup');
-      };
-
-    return {
-      username,
-      password,
-      login,
-      goToSignup
-    };
-
+    console.log('Successfully logged in:', user);
+    router.push('/home');
+  } catch (error) {
+    console.error('Login failed:', error);
   }
-}
+};
 
+const goToSignup = () => {
+  router.push('/signup');
+};
 </script>
 
 <template>
   <v-container>
     <v-form @submit.prevent="login">
-      <v-text-field
-        v-model="username"
-        label="Username"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="password"
-        label="Password"
-        type="password"
-        required
-      ></v-text-field>
+      <v-text-field v-model="username" label="Username" required></v-text-field>
+      <v-text-field v-model="password" label="Password" type="password" required></v-text-field>
       <v-btn type="submit" color="primary">Login</v-btn>
     </v-form>
     <br>

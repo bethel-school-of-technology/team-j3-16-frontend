@@ -1,15 +1,35 @@
 <script setup>
-import { ref } from 'vue';
-import { useRouter, RouterLink, RouterView } from 'vue-router';
-import { VApp, VAppBar, VMain, VContainer, VBtn, VImg, VIcon, VSpacer } from 'vuetify/components';
+import { ref, computed, watch } from 'vue';
+import { useRouter, useRoute, RouterLink, RouterView } from 'vue-router';
+import { useUserStore } from './stores/user'; 
+import { VApp, VAppBar, VMain, VContainer, VBtn, VIcon, VSpacer } from 'vuetify/components';
 import 'vuetify/styles';
 import 'primeicons/primeicons.css';
 
 const router = useRouter();
+const route = useRoute();
+const userStore = useUserStore();
+const isLoggedIn = computed(() => userStore.isLoggedIn);
 
 const signOut = () => {
-  router.push('/');
+  console.log('Logging out...');
+  userStore.logout(); 
+  router.push('/'); 
+  console.log('Logged out. isLoggedIn:', isLoggedIn.value);
 };
+
+const showNavBar = ref(isLoggedIn.value || route.path === '/login');
+
+// Watch for changes in the login status and route to update the navigation visibility
+watch([isLoggedIn, route], () => {
+  showNavBar.value = isLoggedIn.value || route.path === '/';
+  console.log('Route or login status changed. showNavBar:', showNavBar.value);
+});
+
+console.log('Component setup complete. Initial showNavBar:', showNavBar.value, 'isLoggedIn:', isLoggedIn.value);
+
+
+
 </script>
 
 <template>
@@ -18,7 +38,7 @@ const signOut = () => {
       <h2> PrayerIT </h2>
       <i class="pi pi-sparkles"></i>
 
-      <nav>
+      <nav  >
         <RouterLink to="/home">
           <v-btn text class="mx-2">
             Prayers
@@ -37,14 +57,14 @@ const signOut = () => {
 
         <v-spacer></v-spacer>
 
-        <RouterLink to="/profile">
+        <RouterLink to="/profile" >
           <v-btn icon>
             <v-icon>mdi-account</v-icon>
           </v-btn>
         </RouterLink>
 
         <!-- Logout Button -->
-        <v-btn text @click="signOut" class="mx-2">
+        <v-btn  text @click="signOut" class="mx-2">
           Logout
         </v-btn>
       </nav>

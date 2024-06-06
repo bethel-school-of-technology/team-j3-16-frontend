@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import { createApp, reactive } from 'vue';
 import App from './App.vue';
 import { createVuetify } from 'vuetify';
 import 'vuetify/styles';
@@ -31,5 +31,8 @@ const app = createApp(App);
 app.use(vuetify);
 app.use(router);
 app.use(pinia);
+
+const GStore = reactive({flashMessage: ''})
+app.provide('GStore', GStore)
 
 app.mount('#app');
