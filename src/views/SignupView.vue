@@ -28,11 +28,6 @@ export default {
         });
 
         if (response.status === 201) {
-          GStore.flashMessage = 'Signup Successful! Now login!'
-            setTimeout(() => {
-            GStore.flashMessage = ''
-            }, 3000)
-
           console.log('Sign up success: ', username.value);
           router.push('/');
         } else {
@@ -63,8 +58,6 @@ export default {
 
 <template>
   <v-container>
-  <h1>Signup</h1>
-  <br>
     <v-form @submit.prevent="register">
       <v-text-field
         v-model="username"
