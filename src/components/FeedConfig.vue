@@ -64,12 +64,7 @@ export default {
 </template>
 
 <style scoped>
-/* Add any necessary styling here */
-</style>
 
-
-<style scoped>
-/* Add any necessary styling here */
 </style>
 
 
